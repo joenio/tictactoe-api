@@ -1,0 +1,15 @@
+{
+    "name": "joenio/tictactoe-api",
+    "description": "A small RESTful API to play Tic-Tac-Toe game",
+    "require": {
+        "php": ">=5.5",
+        "slim/slim": "^3.0"
+    },
+    "license": "GPLv2+",
+    "authors": [
+        {
+            "name": "Joenio Costa",
+            "email": "joenio@joenio.me"
+        }
+    ]
+}

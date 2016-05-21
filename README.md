@@ -6,7 +6,19 @@ I know, PHP is ugly, but...).
 This project was made as part of the [The VanHackathon event][devpost] see
 file [Challenge.md](Challenge.md) for details.
 
+## Good practices for PHP
+
+* http://br.phptherightway.com (pt-BR)
+
+## Recommended environment for development and production
+
+* GNU/Linux Debian 9.0 "Stretch"
+* PHP 7.0.6
+
 ## Install instructions
+
+    # apt-get install php composer
+    $ composer install
 
 ## Author
 
