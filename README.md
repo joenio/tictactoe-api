@@ -10,7 +10,11 @@ file [Challenge.md](Challenge.md) for details.
 
 ## Author
 
-Joenio Costa <joenio AT joenio.me>
+Joenio Costa <joenio@joenio.me>
+
+## License
+
+GNU GPLv2+
 
 [tictactoe]: http://en.wikipedia.org/wiki/Tic-tac-toe
 [devpost]: http://vanhackathon.devpost.com
