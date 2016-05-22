@@ -24,6 +24,10 @@ $app->add(new ResponseMiddleware());
 $app->add(new DebugMiddleware());
 $app->add(new FlushDatabaseMiddleware($container));
 
+$app->get('/', function ($request, $response, $args) {
+  return $response->withStatus(302)->withHeader('Location', 'index.html');
+});
+
 $app->get('/mark/{row}/{column}', function ($request, $response, $args) {
   $game = $_SESSION['game'];
   if ($winner = $game->getWinner()) {
