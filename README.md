@@ -20,14 +20,13 @@ file [Challenge.md](Challenge.md) for details.
     # apt-get install php composer php-sqlite3
     $ composer install
 
-## Database
+### Create database
 
     $ vendor/bin/doctrine orm:schema-tool:create
-    $ vendor/bin/doctrine orm:schema-tool:update --force
 
 ## Running (development environment)
 
-    $ php -S localhost:8000
+    $ php -S 0.0.0.0:8000
 
 ## Running (production environment)
 
