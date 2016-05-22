@@ -4,11 +4,11 @@
  **/
 class TicTacToe {
 
-  /** @Id @Column(type="integer") @GeneratedValue **/
-  protected $id;
+  /** @Id @Column(type="string") **/
+  protected $token;
 
-  private $token = null;
-  public $grid = array(
+  /** @Column(type="array") **/
+  protected $grid = array(
     array(null, null, null),
     array(null, null, null),
     array(null, null, null)
@@ -20,6 +20,10 @@ class TicTacToe {
 
   public function mark($row, $column) {
     $this->grid[$row][$column] = 'X';
+  }
+
+  public function getGrid() {
+    return $this->grid;
   }
 
 }
