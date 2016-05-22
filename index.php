@@ -26,23 +26,26 @@ $app->add(new FlushDatabaseMiddleware($container));
 
 $app->get('/mark/{row}/{column}', function ($request, $response, $args) {
   $game = $_SESSION['game'];
-  $game->mark($args['row'], $args['column']);
+  $game->mark($args['row'], $args['column'], 'X');
+  TicTacToeComputerPlayer::mark($game, 'O');
   $this->db->persist($game);
   return $response;
 });
 
-$app->get('/abort', function ($request, $response, $args) {
+$app->get('/reset', function ($request, $response, $args) {
   $game = $_SESSION['game'];
   if ($game) {
     $this->db->remove($game);
+    $_SESSION['response']['message'] = 'game reseted';
   }
   return $response;
 });
 
-$app->get('/grid', function ($request, $response, $args) {
+$app->get('/status', function ($request, $response, $args) {
   $game = $_SESSION['game'];
   if ($game) {
     $_SESSION['response']['grid'] = $game->getGrid();
+    $_SESSION['response']['winner'] = $game->getWinner();
   }
   return $response;
 });
