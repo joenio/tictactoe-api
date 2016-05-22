@@ -1,6 +1,4 @@
-<?php
-/**
- * @Entity @Table(name="tictactoes")
+<?php /** * @Entity @Table(name="tictactoes")
  **/
 class TicTacToe {
 
@@ -14,12 +12,35 @@ class TicTacToe {
     array(null, null, null)
   );
 
+  const INVALID_FIELD= 10;
+  const FIELD_IN_USE= 20;
+
   public function __construct($token) {
     $this->token = $token;
   }
 
+  public function is_valid_grid_index($row, $column) {
+	  if($row > 2 || $column > 2 || $rown < 0 || $column < 0) {
+	    return false;
+	  }
+	  else {
+        return true;
+	  }
+  }
+
   public function mark($row, $column, $symbol) {
-    $this->grid[$row][$column] = $symbol;
+	$result;
+	if($this->is_valid_grid_index($row,$column)) {
+		if($this->grid[$row][$column] == null) {
+			$this->grid[$row][$column] = $symbol;
+			$result = "SUCCSESS";
+		}else {
+			$result = "POSITION ALREADY MARKED";
+		}
+	} else {
+		$result = "INVALID FIELD POSITION";
+	}
+	return $result;
   }
 
   public function getGrid() {

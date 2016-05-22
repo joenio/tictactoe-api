@@ -10,7 +10,7 @@ spl_autoload_register(function ($classname) {
   }
 });
 
-$app = new Slim\App();
+$app = new Slim\App(array('displayErrorDetails' => true));
 
 require_once 'config/bootstrap.php';
 $container = $app->getContainer();
@@ -34,12 +34,14 @@ $app->get('/mark/{row}/{column}', function ($request, $response, $args) {
     $_SESSION['response']['message'] = "game finished, player '$winner' won";
   }
   else {
-    $game->mark($args['row'], $args['column'], 'X');
+    $status = $game->mark($args['row'], $args['column'], 'X');
     $value = TicTacToeComputerPlayer::mark($game, 'O');
     $this->db->persist($game);
+    $_SESSION['response']['message'] = $status;
     $_SESSION['response']['O'] = array('row' => $value[0], 'column' => $value[1]);
     $_SESSION['response']['X'] = array('row' => $args['row'], 'column' => $args['column']);
   }
+  $this->db->persist($game);
   return $response;
 });
 
