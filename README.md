@@ -20,6 +20,14 @@ file [Challenge.md](Challenge.md) for details.
     # apt-get install php composer
     $ composer install
 
+## Running (development environment)
+
+    $ php -S localhost:8000
+
+## Running (production environment)
+
+(pending)
+
 ## Author
 
 Joenio Costa <joenio@joenio.me>
