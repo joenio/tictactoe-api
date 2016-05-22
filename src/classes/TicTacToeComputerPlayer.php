@@ -17,7 +17,9 @@ class TicTacToeComputerPlayer {
     $value = TicTacToeComputerPlayer::random_play($game);
     if ($value) {
       $game->mark($value[0], $value[1], $symbol);
+      return array($value[0], $value[1]);
     }
+    return false;
   }
 
 }

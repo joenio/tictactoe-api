@@ -26,9 +26,16 @@ $app->add(new FlushDatabaseMiddleware($container));
 
 $app->get('/mark/{row}/{column}', function ($request, $response, $args) {
   $game = $_SESSION['game'];
-  $game->mark($args['row'], $args['column'], 'X');
-  TicTacToeComputerPlayer::mark($game, 'O');
-  $this->db->persist($game);
+  if ($winner = $game->getWinner()) {
+    $_SESSION['response']['message'] = "game finished, player '$winner' won";
+  }
+  else {
+    $game->mark($args['row'], $args['column'], 'X');
+    $value = TicTacToeComputerPlayer::mark($game, 'O');
+    $this->db->persist($game);
+    $_SESSION['response']['O'] = array('row' => $value[0], 'column' => $value[1]);
+    $_SESSION['response']['X'] = array('row' => $args['row'], 'column' => $args['column']);
+  }
   return $response;
 });
 
