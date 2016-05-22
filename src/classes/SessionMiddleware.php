@@ -1,25 +1,31 @@
 <?php
 class SessionMiddleware {
 
-  private function validate_session() {
-    $token = $_SESSION['token'];
-    if(! preg_match('/^[[:xdigit:]]{32}$/', $token)) {
-      $_SESSION['http_status_code'] = 401;
-    }
+  private function token_is_valid($token) {
+    return preg_match('/^[[:xdigit:]]{32}$/i', $token);
   }
 
-  private function create_or_restore_session($token) {
-    if (empty($token)) {
-      $_SESSION['token'] = md5(uniqid(rand(), true));
-    }
-    else {
-      $_SESSION['token'] = $token;
-    }
+  private function clear_session() {
+    setcookie('token', null);
+    $_SESSION['token'] = null;
+  }
+
+  private function start_session() {
+    $token = md5(uniqid(rand(), true));
+    setcookie('token', $token);
+    $_SESSION['token'] = $token;
   }
 
   public function __invoke($request, $response, $next) {
-    $this->create_or_restore_session($request->getParam('token'));
-    $this->validate_session();
+    $token = $_SESSION['token'] = $_COOKIE['token'];
+    if (empty($token)) {
+      $this->start_session();
+    }
+    elseif(! $this->token_is_valid($token)) {
+      $this->clear_session();
+      $_SESSION['http_status_code'] = 401;
+      $_SESSION['message'] = "token '$token' is invalid";
+    }
     $response = $next($request, $response);
     return $response;
   }
