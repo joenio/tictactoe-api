@@ -3,7 +3,9 @@
     "description": "A small RESTful API to play Tic-Tac-Toe game",
     "require": {
         "php": ">=5.5",
-        "slim/slim": "^3.0"
+        "slim/slim": "^3.0",
+        "ext-pdo_sqlite": "*",
+        "doctrine/orm": ">=2.4"
     },
     "license": "GPLv2+",
     "authors": [
