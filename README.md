@@ -17,7 +17,7 @@ file [Challenge.md](Challenge.md) for details.
 
 ## Install instructions
 
-    # apt-get install php composer
+    # apt-get install php composer php-sqlite3
     $ composer install
 
 ## Running (development environment)

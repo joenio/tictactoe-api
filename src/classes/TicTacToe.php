@@ -1,11 +1,26 @@
 <?php
+/**
+ * @Entity @Table(name="tictactoes")
+ **/
 class TicTacToe {
 
-   public $var = "valor";
+  /** @Id @Column(type="integer") @GeneratedValue **/
+  protected $id;
 
-   public function funcao() {
-      echo $this->var;
-   }
+  private $token = null;
+  public $grid = array(
+    array(null, null, null),
+    array(null, null, null),
+    array(null, null, null)
+  );
+
+  public function __construct($token) {
+    $this->token = $token;
+  }
+
+  public function mark($row, $column) {
+    $this->grid[$row][$column] = 'X';
+  }
 
 }
 ?>
