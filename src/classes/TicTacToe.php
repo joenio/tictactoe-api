@@ -22,12 +22,12 @@ class TicTacToe {
   }
 
   public function is_valid_grid_index($row, $column) {
-	  if($row > 2 || $column > 2 || $rown < 0 || $column < 0) {
-	    return false;
-	  }
-	  else {
-        return true;
-	  }
+    if($row > 2 || $column > 2 || $rown < 0 || $column < 0) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   public function mark($row, $column, $symbol) {
