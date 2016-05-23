@@ -1,4 +1,6 @@
-<?php /** * @Entity @Table(name="tictactoes")
+<?php
+/**
+ * @Entity @Table(name="tictactoes")
  **/
 class TicTacToe {
 
@@ -29,18 +31,20 @@ class TicTacToe {
   }
 
   public function mark($row, $column, $symbol) {
-	$result;
-	if($this->is_valid_grid_index($row,$column)) {
-		if($this->grid[$row][$column] == null) {
-			$this->grid[$row][$column] = $symbol;
-			$result = "SUCCSESS";
-		}else {
-			$result = "POSITION ALREADY MARKED";
-		}
-	} else {
-		$result = "INVALID FIELD POSITION";
-	}
-	return $result;
+    $result;
+    if($this->is_valid_grid_index($row,$column)) {
+      if(is_null($this->grid[$row][$column])) {
+        $this->grid[$row][$column] = $symbol;
+        $result = "SUCCSESS";
+      }
+      else {
+        $result = "POSITION ALREADY MARKED";
+      }
+    }
+    else {
+      $result = "INVALID FIELD POSITION";
+    }
+    return $result;
   }
 
   public function getGrid() {
@@ -49,9 +53,7 @@ class TicTacToe {
 
   public function getWinner() {
     $grid = $this->getGrid();
-    # retorna o vencedor se houver algum ou falso caso contrário
     for ($row = 0; $row < 3; $row++) {
-    # verifica se houve ganhador nas linhas
       $value = '';
       for ($column = 0; $column < 3; $column++) {
         if (! is_null($grid[$row][$column])) {
@@ -66,7 +68,6 @@ class TicTacToe {
       }
     }
     for ($column = 0; $column < 3; $column++) {
-    # verifica se houve ganhador nas colunas
       $value = '';
       for ($row = 0; $row < 3; $row++) {
         $value = $value . $grid[$row][$column];

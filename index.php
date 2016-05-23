@@ -21,7 +21,6 @@ $container['db'] = function ($c) {
 $app->add(new LoadGameMiddleware($container));
 $app->add(new SessionMiddleware());
 $app->add(new ResponseMiddleware());
-$app->add(new DebugMiddleware());
 $app->add(new FlushDatabaseMiddleware($container));
 
 $app->get('/', function ($request, $response, $args) {
@@ -36,7 +35,6 @@ $app->get('/mark/{row}/{column}', function ($request, $response, $args) {
   else {
     $status = $game->mark($args['row'], $args['column'], 'X');
     $value = TicTacToeComputerPlayer::mark($game, 'O');
-    $this->db->persist($game);
     $_SESSION['response']['message'] = $status;
     $_SESSION['response']['O'] = array('row' => $value[0], 'column' => $value[1]);
     $_SESSION['response']['X'] = array('row' => $args['row'], 'column' => $args['column']);
